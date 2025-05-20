@@ -36,6 +36,11 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
+const CardSchema = new mongoose_1.Schema({
+    cardNumber: { type: String, required: true },
+    cvv: { type: String, required: true },
+    expiryDate: { type: String, required: true },
+});
 const AccountSchema = new mongoose_1.Schema({
     firstName: { type: String, required: true },
     surname: { type: String, required: true },
@@ -43,5 +48,6 @@ const AccountSchema = new mongoose_1.Schema({
     phoneNumber: { type: String, required: true, unique: true },
     dateOfBirth: { type: Date, required: true },
     accountNumber: { type: String, required: true, unique: true },
+    card: { type: CardSchema, required: true },
 }, { timestamps: true });
 exports.AccountModel = mongoose_1.default.model('Account', AccountSchema);

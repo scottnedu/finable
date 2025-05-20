@@ -1,9 +1,16 @@
 // models/account.model.ts
 
 import mongoose, { Schema, Document } from 'mongoose';
-import { IAccount } from '../types/account.types';
+import { IAccount, ICard } from '../types/account.types';
+
 
 export interface IAccountModel extends IAccount, Document {}
+
+const CardSchema: Schema<ICard> = new Schema<ICard>({
+  cardNumber: { type: String, required: true },
+  cvv: { type: String, required: true },
+  expiryDate: { type: String, required: true },
+});
 
 const AccountSchema: Schema = new Schema<IAccountModel>(
   {
@@ -13,6 +20,7 @@ const AccountSchema: Schema = new Schema<IAccountModel>(
     phoneNumber: { type: String, required: true, unique: true },
     dateOfBirth: { type: Date, required: true },
     accountNumber: { type: String, required: true, unique: true },
+    card:{ type: CardSchema, required: true },
   },
   { timestamps: true }
 );
