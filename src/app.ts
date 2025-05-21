@@ -11,8 +11,12 @@ const app: Application = express();
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
-app.use("/api/accounts", accountRoutes);
 app.use(errorHandler);
+app.use("/api/accounts", accountRoutes);
+app.use("/api/accounts", accountRoutes);
+app.use("/api/accounts", accountRoutes);
+
+
 
 // Base route
 app.get("/", (_req, res) => {

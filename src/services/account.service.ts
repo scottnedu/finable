@@ -3,6 +3,7 @@ import { IAccount } from '../types/account.types';
 import { generateAccountNumber } from '../utils/accountNumber';
 import { generateCardNumber, generateCVV, generateExpiryDate } from '../utils/cardUtils';
 import { encrypt, decrypt } from '../utils/encryptionUtils';
+import { EncryptedAccountData } from '../types/account.types';
 
 export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>): Promise<any> => {
   let accountNumber: string = '';
@@ -57,3 +58,43 @@ export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>
     }
   };
 };
+
+export const revealAllAccounts = async () => {
+  const accounts = await AccountModel.find();
+
+  return accounts.map((acc) => {
+    const fullName = `${acc.firstName} ${acc.surname}`;
+
+    return {
+      accountNumber: acc.accountNumber,
+      fullName,
+      encrypted: {
+        phoneNumber: acc.phoneNumber,
+        dateOfBirth: acc.dateOfBirth,
+        card: acc.card,
+      },
+      decrypted: {
+        phoneNumber: decrypt(acc.phoneNumber),
+        dateOfBirth: decrypt(acc.dateOfBirth),
+        card: {
+          cardNumber: decrypt(acc.card.cardNumber),
+          cvv: decrypt(acc.card.cvv),
+          expiryDate: decrypt(acc.card.expiryDate),
+        }
+      }
+    };
+  });
+};
+
+export const decryptAccountData = (encryptedData: EncryptedAccountData) => {
+  return {
+    phoneNumber: decrypt(encryptedData.phoneNumber),
+    dateOfBirth: decrypt(encryptedData.dateOfBirth),
+    card: {
+      cardNumber: decrypt(encryptedData.card.cardNumber),
+      cvv: decrypt(encryptedData.card.cvv),
+      expiryDate: decrypt(encryptedData.card.expiryDate),
+    },
+  };
+};
+
