@@ -46,7 +46,7 @@ const AccountSchema = new mongoose_1.Schema({
     surname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phoneNumber: { type: String, required: true, unique: true },
-    dateOfBirth: { type: Date, required: true },
+    dateOfBirth: { type: String, required: true },
     accountNumber: { type: String, required: true, unique: true },
     card: { type: CardSchema, required: true },
 }, { timestamps: true });

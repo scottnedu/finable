@@ -1,8 +1,7 @@
-// types/account.types.ts
 export interface ICard {
   cardNumber: string;
   cvv: string;
-  expiryDate: string; // Format: MM/YY
+  expiryDate: string;
 }
 
 export interface IAccount {
@@ -10,7 +9,7 @@ export interface IAccount {
   surname: string;
   email: string;
   phoneNumber: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   accountNumber: string;
   card: ICard;
   createdAt?: Date;

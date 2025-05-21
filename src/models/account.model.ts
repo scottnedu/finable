@@ -18,7 +18,7 @@ const AccountSchema: Schema = new Schema<IAccountModel>(
     surname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phoneNumber: { type: String, required: true, unique: true },
-    dateOfBirth: { type: Date, required: true },
+    dateOfBirth: { type: String, required: true },
     accountNumber: { type: String, required: true, unique: true },
     card:{ type: CardSchema, required: true },
   },

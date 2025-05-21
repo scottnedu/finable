@@ -3,10 +3,6 @@ import { Request, Response, NextFunction } from "express";
 import { createAccount } from "../services/account.service";
 import { IAccount } from "../types/account.types";
 
-/**
- * POST /api/accounts
- * Body → firstName, surname, email, phoneNumber, dateOfBirth
- */
 export const createAccountHandler = async (
   req: Request<{}, {}, Omit<IAccount, "accountNumber">>,
   res: Response,
@@ -15,7 +11,7 @@ export const createAccountHandler = async (
   try {
     const newAccount = await createAccount(req.body);
     res.status(201).json({
-      status: "success",
+      status: "Your account has been created successfully",
       data: newAccount,
     });
   } catch (err) {
