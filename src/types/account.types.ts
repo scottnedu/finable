@@ -11,7 +11,7 @@ export interface IAccount {
   phoneNumber: string;
   dateOfBirth: string;
   accountNumber: string;
-  card: ICard;
+  card?: ICard;
   createdAt?: Date;
   updatedAt?: Date;
 }

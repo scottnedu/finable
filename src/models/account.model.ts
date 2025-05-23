@@ -20,7 +20,11 @@ const AccountSchema: Schema = new Schema<IAccountModel>(
     phoneNumber: { type: String, required: true, unique: true },
     dateOfBirth: { type: String, required: true },
     accountNumber: { type: String, required: true, unique: true },
-    card:{ type: CardSchema, required: true },
+    card:{ 
+      type: CardSchema, 
+      required: false,
+      default: null
+    },
   },
   { timestamps: true }
 );
