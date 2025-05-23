@@ -6,7 +6,6 @@ const accountNumber_1 = require("../utils/accountNumber");
 const createAccount = async (accountData) => {
     let accountNumber = '';
     let isUnique = false;
-    // Ensure unique account number
     while (!isUnique) {
         accountNumber = (0, accountNumber_1.generateAccountNumber)();
         const existing = await account_model_1.AccountModel.findOne({ accountNumber });

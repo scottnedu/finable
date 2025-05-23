@@ -2,11 +2,19 @@ import { AccountModel } from '../models/account.model';
 import { IAccount } from '../types/account.types';
 import { generateAccountNumber } from '../utils/accountNumber';
 
-export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>): Promise<any> => {
+type CreatedAccountResponse = {
+  firstName: string;
+  surname: string;
+  email: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  accountNumber: string;
+};
+
+export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>): Promise<CreatedAccountResponse> => {
   let accountNumber: string = '';
   let isUnique = false;
 
-  // Ensure unique account number
   while (!isUnique) {
     accountNumber = generateAccountNumber();
     const existing = await AccountModel.findOne({ accountNumber });
@@ -20,13 +28,12 @@ export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>
 
   const savedAccount = await account.save();
 
- return {
-  firstName: savedAccount.firstName,
-  surname: savedAccount.surname,
-  email: savedAccount.email,
-  phoneNumber: savedAccount.phoneNumber,
-  dateOfBirth: savedAccount.dateOfBirth,
-  accountNumber: savedAccount.accountNumber,
+  return {
+    firstName: savedAccount.firstName,
+    surname: savedAccount.surname,
+    email: savedAccount.email,
+    phoneNumber: savedAccount.phoneNumber,
+    dateOfBirth: savedAccount.dateOfBirth,
+    accountNumber: savedAccount.accountNumber,
+  };
 };
-
-}
