@@ -6,12 +6,19 @@ const createAccountHandler = async (req, res, next) => {
     try {
         const newAccount = await (0, account_service_1.createAccount)(req.body);
         res.status(201).json({
-            status: "Your account has been created successfully Obade",
+            status: "success",
+            message: "Your account has been created successfully",
             data: newAccount,
         });
     }
     catch (err) {
-        next(err); // let the global error-handler decide
+        if (err instanceof Error) {
+            err.message = `Failed to create account: ${err.message}`;
+            next(err);
+        }
+        else {
+            next(new Error("An unknown error occurred"));
+        }
     }
 };
 exports.createAccountHandler = createAccountHandler;

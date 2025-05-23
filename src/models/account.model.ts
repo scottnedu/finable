@@ -1,5 +1,3 @@
-// models/account.model.ts
-
 import mongoose, { Schema, Document } from 'mongoose';
 import { IAccount, ICard } from '../types/account.types';
 

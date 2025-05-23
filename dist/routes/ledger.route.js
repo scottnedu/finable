@@ -1,5 +1,4 @@
 "use strict";
-// models/account.model.ts
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -34,24 +33,10 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccountModel = void 0;
-const mongoose_1 = __importStar(require("mongoose"));
-const CardSchema = new mongoose_1.Schema({
-    cardNumber: { type: String, required: true },
-    cvv: { type: String, required: true },
-    expiryDate: { type: String, required: true },
-});
-const AccountSchema = new mongoose_1.Schema({
-    firstName: { type: String, required: true },
-    surname: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    phoneNumber: { type: String, required: true, unique: true },
-    dateOfBirth: { type: String, required: true },
-    accountNumber: { type: String, required: true, unique: true },
-    card: {
-        type: CardSchema,
-        required: false,
-        default: null
-    },
-}, { timestamps: true });
-exports.AccountModel = mongoose_1.default.model('Account', AccountSchema);
+// routes/ledger.route.ts
+const express_1 = require("express");
+const ledgerController = __importStar(require("../controllers/ledger.controller"));
+const router = (0, express_1.Router)();
+router.get('/ledger', ledgerController.getAllAccounts); // List all accounts
+router.post('/decrypt', ledgerController.decryptEncryptedData); // Decrypt encrypted data
+exports.default = router;

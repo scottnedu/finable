@@ -15,6 +15,8 @@ const app: Application = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(errorHandler);
+
+// Routes
 app.use("/api/account", accountRoutes);
 app.use('/api/account', virtualCardRoutes);
 app.use('/api/account', encryptionRoutes);

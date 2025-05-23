@@ -1,4 +1,3 @@
-// controllers/account.controller.ts
 import { Request, Response, NextFunction } from "express";
 import { createAccount } from "../services/account.service";
 import { IAccount } from "../types/account.types";
