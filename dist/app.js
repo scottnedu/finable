@@ -17,6 +17,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)("dev"));
 app.use(errorHandler_1.errorHandler);
+// Routes
 app.use("/api/account", account_route_1.default);
 app.use('/api/account', virtualCard_route_1.default);
 app.use('/api/account', encryption_routes_1.default);

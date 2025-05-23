@@ -51,12 +51,15 @@ const decryptEncryptedData = async (req, res) => {
         const { encryptedData, iv, label } = req.body;
         if (!encryptedData || !iv) {
             res.status(400).json({ message: 'encryptedData and iv are required' });
+            return;
         }
         const decrypted = ledgerService.decryptData(encryptedData, iv);
         if (label) {
             res.json({ [label]: decrypted });
         }
-        res.json({ decrypted });
+        else {
+            res.json({ decrypted });
+        }
     }
     catch (error) {
         const message = error instanceof Error ? error.message : String(error);

@@ -1,5 +1,4 @@
 "use strict";
-// utils/accountNumberGenerator.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateAccountNumber = void 0;
 const generateAccountNumber = () => {

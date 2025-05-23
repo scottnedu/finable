@@ -33,10 +33,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-// routes/ledger.route.ts
 const express_1 = require("express");
 const ledgerController = __importStar(require("../controllers/ledger.controller"));
 const router = (0, express_1.Router)();
-router.get('/ledger', ledgerController.getAllAccounts); // List all accounts
-router.post('/decrypt', ledgerController.decryptEncryptedData); // Decrypt encrypted data
+router.get('/ledger', ledgerController.getAllAccounts);
+router.post('/decrypt', ledgerController.decryptEncryptedData);
 exports.default = router;
