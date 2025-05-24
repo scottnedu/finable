@@ -1,9 +1,25 @@
 "use strict";
+// import { Request, Response, NextFunction } from "express";
+// import { createAccount } from "../services/account.service";
+// import { IAccount } from "../types/account.types";
+// import mongoose from "mongoose";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAccountHandler = void 0;
 const account_service_1 = require("../services/account.service");
+const mongoose_1 = __importDefault(require("mongoose"));
 const createAccountHandler = async (req, res, next) => {
     try {
+        // Extra safety: Handle empty body
+        if (!req.body || Object.keys(req.body).length === 0) {
+            res.status(400).json({
+                status: "error",
+                message: "Request body cannot be empty.",
+            });
+            return;
+        }
         const newAccount = await (0, account_service_1.createAccount)(req.body);
         res.status(201).json({
             status: "success",
@@ -12,13 +28,17 @@ const createAccountHandler = async (req, res, next) => {
         });
     }
     catch (err) {
-        if (err instanceof Error) {
-            err.message = `Failed to create account: ${err.message}`;
-            next(err);
+        // Mongoose validation error
+        if (err instanceof mongoose_1.default.Error.ValidationError) {
+            const errors = Object.values(err.errors).map((e) => e.message);
+            res.status(400).json({
+                status: "error",
+                message: errors,
+            });
+            return;
         }
-        else {
-            next(new Error("An unknown error occurred"));
-        }
+        // Fallback for other errors
+        next(new Error("Failed to create account: " + err?.message));
     }
 };
 exports.createAccountHandler = createAccountHandler;
