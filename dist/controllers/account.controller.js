@@ -1,8 +1,4 @@
 "use strict";
-// import { Request, Response, NextFunction } from "express";
-// import { createAccount } from "../services/account.service";
-// import { IAccount } from "../types/account.types";
-// import mongoose from "mongoose";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,7 +24,7 @@ const createAccountHandler = async (req, res, next) => {
         });
     }
     catch (err) {
-        // Mongoose validation error
+        // ✅ Handle Mongoose validation errors
         if (err instanceof mongoose_1.default.Error.ValidationError) {
             const errors = Object.values(err.errors).map((e) => e.message);
             res.status(400).json({
@@ -37,7 +33,15 @@ const createAccountHandler = async (req, res, next) => {
             });
             return;
         }
-        // Fallback for other errors
+        // ✅ Handle duplicate email/phone errors from service
+        if (err.message?.includes("already exists")) {
+            res.status(400).json({
+                status: "error",
+                message: err.message,
+            });
+            return;
+        }
+        // 🚨 Fallback: Internal server error
         next(new Error("Failed to create account: " + err?.message));
     }
 };
