@@ -15,11 +15,11 @@ export const createAccountHandler = async (
       data: newAccount,
     });
   } catch (err) {
-    if(err instanceof Error) {
-    err.message = `Failed to create account: ${err.message}`;
-    next(err);
-  } else{
-    next(new Error("An unknown error occurred"));
+    if (err instanceof Error) {
+      err.message = `Failed to create account: ${err.message}`;
+      next(err);
+    } else {
+      next(new Error("An unknown error occurred"));
     }
   }
 };
