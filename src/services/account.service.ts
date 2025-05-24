@@ -11,7 +11,27 @@ type CreatedAccountResponse = {
   accountNumber: string;
 };
 
-export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>): Promise<CreatedAccountResponse> => {
+export const createAccount = async (
+  accountData: Omit<IAccount, 'accountNumber'>
+): Promise<CreatedAccountResponse> => {
+  // ✅ Check if email or phone number already exists
+  const existingAccount = await AccountModel.findOne({
+    $or: [
+      { email: accountData.email },
+      { phoneNumber: accountData.phoneNumber },
+    ],
+  });
+
+  if (existingAccount) {
+    const reason =
+      existingAccount.email === accountData.email
+        ? 'Account with this Email already exists'
+        : 'Account with this Phone number already exists';
+    // Throwing this will be caught in your controller and return proper 400 error
+    throw new Error(reason);
+  }
+
+  // ✅ Generate unique account number
   let accountNumber: string = '';
   let isUnique = false;
 
@@ -21,6 +41,7 @@ export const createAccount = async (accountData: Omit<IAccount, 'accountNumber'>
     if (!existing) isUnique = true;
   }
 
+  // ✅ Create and save the new account
   const account = new AccountModel({
     ...accountData,
     accountNumber,
