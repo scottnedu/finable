@@ -29,7 +29,7 @@ In a world rebuilt after digital collapse, Finable represents trust, structure, 
 
 - 🚀 **Live API**: <https://finable-api.onrender.com>
 - 📘 **Postman Documentation**: <https://documenter.getpostman.com/view/42929987/2sB2qajMVk>
-- 🗂️ **GitHub Repository**: <https://github.com/scottnedu/finable>
+- 🗂️ **Finable Backend - Account API Test**: <https://tinyurl.com/3pze98dz>
 
 > _“Reject README files? No. Reject incomplete documentation. Clarity lives here.” – Edeba, Weaver of Clarity_
 

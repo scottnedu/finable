@@ -27,7 +27,6 @@ export const createAccount = async (
       existingAccount.email === accountData.email
         ? 'Account with this Email already exists'
         : 'Account with this Phone number already exists';
-    // Throwing this will be caught in your controller and return proper 400 error
     throw new Error(reason);
   }
 
