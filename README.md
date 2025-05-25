@@ -21,6 +21,7 @@ In a world rebuilt after digital collapse, Finable represents trust, structure, 
 - TypeScript
 - MongoDB
 - Crypto (Node.js native)
+- joi (for validation)
 - Postman (for API documentation)
 
 ---
@@ -31,15 +32,10 @@ In a world rebuilt after digital collapse, Finable represents trust, structure, 
 - 📘 **Postman Documentation**: <https://documenter.getpostman.com/view/42929987/2sB2qajMVk>
 - 🗂️ **Finable Backend - Account API Test**: <https://tinyurl.com/3pze98dz>
 
-> _“Reject README files? No. Reject incomplete documentation. Clarity lives here.” – Edeba, Weaver of Clarity_
-
----
-
 ## 📦 Features
 
 ### ✅ Account Creation
 
-- Endpoint: `POST /api/account/create`
 - Automatically generates a unique 10-digit account number.
 
 ### ✅ Virtual Card Generation
@@ -51,6 +47,7 @@ In a world rebuilt after digital collapse, Finable represents trust, structure, 
 
 - Sensitive fields are encrypted using AES-256.
 - Fields: `cardNumber`, `cvv`, `expiryDate`, `phoneNumber`, `dateOfBirth`.
+- Both encrpted and decrpted version are returned in API response.
 
 ### ✅ Account Listing
 
@@ -62,13 +59,13 @@ In a world rebuilt after digital collapse, Finable represents trust, structure, 
 
 ## 🔐 Environment Variables
 
-Create a `.env` file using the following template:
+My `.env` file contains the following:
 
 ```env
 PORT=3000
-MONGO_URI=your_mongodb_connection_string
-ENCRYPTION_KEY=your_32_byte_encryption_key
-IV_KEY=your_16_byte_encryption_key
+MONGO_URI=my_mongodb_connection_string
+ENCRYPTION_KEY=my_32_byte_encryption_key
+IV_KEY=my_16_byte_encryption_key
 
 🧙‍♂️ Protocol Compliance
 This API is fully compliant with all five Trials of the Learnable Protocol. From unique ID generation to field-level encryption and professional API documentation, Finable is a fortress built on trust.
